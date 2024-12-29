@@ -222,7 +222,7 @@
 // function no1(callback) {
     
 //     setTimeout(() => {
-//         console.log("dog");
+//         console.log("dog"); 
 //         callback()
 //     },1000)
 // }
@@ -236,36 +236,36 @@
  
 // no1(no2)  //used to maintain the order {dog , cat}
 
-function attendance(callback){
-    setTimeout(() => {
-        console.log("present");
-        callback()
-    },1000)
-}
+// function attendance(callback){
+//     setTimeout(() => {
+//         console.log("present");
+//         callback()
+//     },1000)
+// }
 
-function lunch(callback){
-    setTimeout(() => {
-        console.log("okay");
-        callback()
-    },1000)
-}
+// function lunch(callback){
+//     setTimeout(() => {
+//         console.log("okay");
+//         callback()
+//     },1000)
+// }
 
-function goingtohome(callback){
+// function goingtohome(callback){
     
-    setTimeout(() => {
-        console.log("bus")
-        callback()
-    },1000)
-}
+//     setTimeout(() => {
+//         console.log("bus")
+//         callback()
+//     },1000)
+// }
 
-//callback hell
-attendance(() => {
-    lunch(() => {
-        goingtohome(() => {
-            console.log("Day completed")
-        })
-    })
-})
+// //callback hell
+// attendance(() => {
+//     lunch(() => {
+//         goingtohome(() => {
+//             console.log("Day completed")
+//         })
+//     })
+// })
 
 //promise
 // function attendance(){
@@ -298,43 +298,43 @@ attendance(() => {
 // brain().then((value) => console.log(value))
 //        .catch(err => console.error(err))
 
-// function attendance(){
-//     return new Promise((resolve,reject) => {
-//         setTimeout(() => {
-//             let status = true
-//             if(status)
-//                 resolve("present");
-//             else
-//                 reject("absent")
-//         },1000)
-//     })
-// }
+function attendance(){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            let status = true
+            if(status)
+                resolve("present");
+            else
+                reject("absent")
+        },1000)
+    })
+}
 
-// function lunch(){
-//     return new Promise((resolve,reject) => { 
-//         setTimeout(() => {
-//             let state = true
-//             if(state)
-//                 resolve("Done"); 
-//             else
-//                 reject("Undone")
-//         },1000)
-//     })
-// }
+function lunch(){
+    return new Promise((resolve,reject) => { 
+        setTimeout(() => {
+            let state = true
+            if(state)
+                resolve("Done"); 
+            else
+                reject("Undone")
+        },1000)
+    })
+}
 
-// function goingtohome(){ 
-//     return new Promise((resolve,reject) => {
-//         setTimeout(() => {
-//             let home  = true
-//             if(home)
-//                 resolve("reached the bus");
-//             else
-//                 reject("missed the bus")
-//         },1000)
-//     })
-// }
+function goingtohome(){ 
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            let home  = false
+            if(home)
+                resolve("reached the bus");
+            else
+                reject("missed the bus")
+        },1000)
+    })
+}
 
-// //promise -> it return atleast one value
+// //promise -> it return atleast one value (chaining)
 // attendance().then((value) => { console.log(value); return lunch()
 //             .then((value) => { console.log(value); return goingtohome()
 //             .then((value) => { console.log(value); console.log("day completed") })
@@ -383,3 +383,21 @@ attendance(() => {
 // }
  
 // fun1('abc',fun2)
+
+//promise .all 
+
+async function dog(){
+    try{
+        let [a,b,c] = await Promise.all([attendance(),lunch(),goingtohome()]);
+        console.log(a)
+        console.log(b)
+        console.log(c)
+
+    }
+    catch(err){
+        console.error(err)
+    }
+}
+dog()
+
+//if one gets false(error) , it return error
